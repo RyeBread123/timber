@@ -1,9 +1,10 @@
 import logLogo from "../images/trunk.png";
 import tinderLogo from "../images/tinder.png";
 
-const Nav = ({ minimal, authToken, setShowModal, showModal }) => {
+const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignUp }) => {
   const handleClick = () => {
     setShowModal(true);
+    setIsSignUp(false);
   };
 
   return (
