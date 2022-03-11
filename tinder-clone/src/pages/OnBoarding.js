@@ -115,7 +115,7 @@ const OnBoarding = () => {
                 required={true}
                 value="woman"
                 onChange={handleChange}
-                checked={false}
+                checked={true}
               />
               <label htmlFor="woman-gender-interest">Woman</label>
               <input
@@ -127,7 +127,7 @@ const OnBoarding = () => {
                 onChange={handleChange}
                 checked={false}
               />
-              <label htmlFor="more-g ender-interest">More</label>
+              <label htmlFor="more-gender-interest">More</label>
             </div>
             <label htmlFor="about">About Me</label>
             <input
