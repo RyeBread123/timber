@@ -4,7 +4,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  text-align:center;
+  text-align: center;
 }
 
 * {
@@ -76,6 +76,7 @@ nav .nav-button {
   border-radius: 10px;
   border: none;
   margin: 10px;
+  height: 50px;
 }
 
 nav .nav-button:disabled {
@@ -90,10 +91,11 @@ nav .nav-button:disabled {
   height: 100vh;
   position: fixed;
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0) 100%
-  ), url(https://i.imgur.com/n61x6ey.jpeg)
+      to bottom,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    url(https://i.imgur.com/n61x6ey.jpeg);
 }
 
 .home {
@@ -132,3 +134,5 @@ nav .nav-button:disabled {
   margin: 8px;
   font-size: 17px;
 }
+
+/* ==========        OnBording        ===================== */

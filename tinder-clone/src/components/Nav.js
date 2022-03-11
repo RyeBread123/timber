@@ -1,7 +1,9 @@
 import logLogo from "../images/trunk.png";
 import tinderLogo from "../images/tinder.png";
 
-const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignUp }) => {
+const Nav = ({ minimal, setShowModal, showModal, setIsSignUp }) => {
+  const authToken = false;
+
   const handleClick = () => {
     setShowModal(true);
     setIsSignUp(false);
@@ -10,7 +12,7 @@ const Nav = ({ minimal, authToken, setShowModal, showModal, setIsSignUp }) => {
   return (
     <nav>
       <div className="logo-container">
-        <img className="logo" alt="logo" src={minimal ? logLogo : tinderLogo} />
+        <img className="logo" alt="logo" src={minimal ? tinderLogo : logLogo} />
       </div>
 
       {!authToken && !minimal && (
