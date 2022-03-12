@@ -13,7 +13,8 @@ app.get('/', (req, res, next) => {
 })
 
 app.post('/signup', (req, res, next) => {
-  res.json("Hello to my app")
+  const client = new MongoClient(uri);
+
 
 })
 
