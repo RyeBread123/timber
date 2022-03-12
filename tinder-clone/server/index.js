@@ -8,8 +8,10 @@ const { v4: uuidv4} = require('uuid')
 // connecting to cluster through mongoDB
 const uri = config.uri
 const jwt = require('jsonwebtoken')
-const cores = require('cors')
+const cors = require('cors')
+const bcrypt = require('bcrypt')
 app.use(cors())
+app.use(express.json())
 // --------------- REQUESTS ---------------------
 
 app.get('/', (req, res, next) => {
@@ -20,7 +22,7 @@ app.post('/signup', async (req, res, next) => {
   const client = new MongoClient(uri);
   const {email, password} = req.body
   // UUID will generate unique number/ID
-  cosnt generateduserId = uuidv4()
+  const generatedUserId = uuidv4()
   // returning a hashed password
   const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -31,7 +33,7 @@ app.post('/signup', async (req, res, next) => {
     const users = database.collection('users')
 
     // check if user exists
-    const existingUser = user.findOne({email})
+    const existingUser = await users.findOne({email})
 
     if (existingUser) {
       return res.send(409).send("user already exists. PLEASE login")
@@ -56,7 +58,7 @@ app.post('/signup', async (req, res, next) => {
     })
     res.status(201).json({token, userId: generatedUserId, email: sanitizedEmail})
   } catch (err) {
-    console.log(error)
+    console.log(err)
   }
 
 })

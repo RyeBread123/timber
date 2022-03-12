@@ -41,7 +41,7 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
         By clicking Log In, you agree to our terms. Learn more at our Privacy
         Policy Fam
       </p>
-      <form onSibmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="email"
           id="email"
