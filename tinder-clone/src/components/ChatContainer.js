@@ -2,7 +2,6 @@ import MatchesDisplay from './MatchesDisplay'
 import ChatDisplay from './ChatDisplay'
 import ChatHeader from './ChatHeader'
 
-
 const ChatContainer = () => {
   return (
     <div className='chat-container'>
