@@ -6,7 +6,7 @@ const config = require('./config.js')
 // pick the version from uuid
 const { v4: uuidv4} = require('uuid')
 // connecting to cluster through mongoDB
-const uri = `mongodb+srv://ryebread:${config.TOKEN}@cluster0.sfnwn.mongodb.net/Cluster0?retryWrites=true&w=majority`
+const uri = config.uri
 const jwt = require('jsonwebtoken')
 const cores = require('cors')
 app.use(cors())
