@@ -62,6 +62,8 @@ const userId = cookies.UserId
   };
 
   return (
+    <>
+    { user &&
     <div className="dashboard">
       <ChatContainer user={user}/>
       <div className="swipe-container">
@@ -86,7 +88,8 @@ const userId = cookies.UserId
           </div>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 
