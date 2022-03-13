@@ -1,9 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TinderCard from 'react-tinder-card'
 import ChatContainer from '../components/ChatContainer'
+import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 const Dashboard = () => {
+  const [cookies,setCookie,removeCookie] = useCookies(['user'])
   const [lastDirection, setLastDirection] = useState();
+  const [user, setUser] = useState(null);
+
+const userId = cookies.UserId
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/user', {
+        params: {userId}
+      })
+      setUser(response.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getUser()
+  }, [])
+
+  console.log('USER', user)
+
+
   const characters = [
     {
       name: "Richard Hendricks",
