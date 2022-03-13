@@ -39,36 +39,20 @@ const userId = cookies.UserId
   useEffect(() => {
     getUser()
     getGenderedUsers()
-  }, [genderedUsers, user])
+  }, [genderedUsers,user])
 
   console.log('gendered Users', genderedUsers)
+  console.log('user',user)
+
+  const updateMatches = async (matchedUserId) => {
+
+  }
 
 
-  const characters = [
-    {
-      name: "Richard Hendricks",
-      url: "https://imgur.com/Uzc3s4j.jpg",
-    },
-    {
-      name: "Erlich Bachman",
-      url: "https://imgur.com/7MvY81t.jpg",
-    },
-    {
-      name: "Monica Hall",
-      url: "https://imgur.com/Fcy1vIF.jpg",
-    },
-    {
-      name: "Jared Dunn",
-      url: "https://imgur.com/tfilOFL.jpg",
-    },
-    {
-      name: "Dinesh Chugtai",
-      url: "https://imgur.com/3uUwLHc.jpg",
-    },
-  ];
-
-  const swiped = (direction, nameToDelete) => {
-    console.log("removing: " + nameToDelete);
+  const swiped = (direction, swipedUserId) => {
+    if (direction === 'right') {
+      updateMatches(swipedUserId)
+    }
     setLastDirection(direction);
   };
 
@@ -83,18 +67,18 @@ const userId = cookies.UserId
       <ChatContainer user={user}/>
       <div className="swipe-container">
         <div className="card-container">
-          {characters.map((character) =>
+          {genderedUsers?.map((genderedUser) =>
             <TinderCard
               className="swipe"
-              key={character.name}
-              onSwipe={(dir) => swiped(dir, character.name)}
-              onCardLeftScreen={() => outOfFrame(character.name)}
+              key={genderedUser.first_name}
+              onSwipe={(dir) => swiped(dir, genderedUser.user_id)}
+              onCardLeftScreen={() => outOfFrame(genderedUser.first_name)}
             >
               <div
-                style={{ backgroundImage: "url(" + character.url + ")" }}
+                style={{ backgroundImage: "url(" + genderedUser.url + ")" }}
                 className="card"
               >
-                <h3>{character.name}</h3>
+                <h3>{genderedUser.first_name}</h3>
               </div>
             </TinderCard>
           )}

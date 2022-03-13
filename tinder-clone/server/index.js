@@ -105,7 +105,6 @@ app.get("/gendered-users", async (req, res, next) => {
     const foundUsers = await users.find(query).toArray()
     // saving database as var
     // collection in mongo db we are connecting to
-
     // querying collection
     res.send(foundUsers);
   } finally {
@@ -134,7 +133,25 @@ app.get('/user', async (req, res, next) => {
   }
 })
 
+app.put("/addmatch", async (req, res, next) => {
+  const client = new MongoClient(uri)
+  const { userId, matchedUserId} = req.body
 
+  try {
+    await client.connect()
+    const database = client.db('app-data')
+    const users = database.collection('users')
+
+    const query = {user_id: userId}
+    const updateDocument = {
+      $push: {matches: {user_id:matchedUserId}},
+    }
+    const user = await users.updateOne(query, updateDocument)
+    res.send(user)
+  } finally {
+    await client.close()
+  }
+})
 
 
 
