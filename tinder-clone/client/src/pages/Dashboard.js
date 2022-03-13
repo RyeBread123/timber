@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie'
 
 const Dashboard = () => {
   const [cookies,setCookie,removeCookie] = useCookies(['user'])
+  const [genderedUsers, setGenderedUsers] = useState(null)
   const [lastDirection, setLastDirection] = useState();
   const [user, setUser] = useState(null);
 
@@ -22,11 +23,25 @@ const userId = cookies.UserId
     }
   }
 
+  const getGenderedUsers = async () => {
+
+    try {
+      const response = await axios.get('http://localhost:8000/gendered-users', {
+        params: {gender: user?.gender_interest}
+      })
+      setGenderedUsers(response.data)
+    } catch(err) {
+      console.log(err);
+    }
+
+  }
+
   useEffect(() => {
     getUser()
-  }, [])
+    getGenderedUsers()
+  }, [genderedUsers, user])
 
-  console.log('USER', user)
+  console.log('gendered Users', genderedUsers)
 
 
   const characters = [

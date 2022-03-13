@@ -92,20 +92,22 @@ app.post("/signup", async (req, res, next) => {
   }
 });
 
-app.get("/users", async (req, res, next) => {
+app.get("/gendered-users", async (req, res, next) => {
   // connects to uri
   const client = new MongoClient(uri);
+  const gender = req.query.gender
 
   try {
     await client.connect();
-    // saving database as var
     const database = client.db("app-data");
-    // collection in mongo db we are connecting to
     const users = database.collection("users");
+    const query = {gender_identity: {$eq: gender}}
+    const foundUsers = await users.find(query).toArray()
+    // saving database as var
+    // collection in mongo db we are connecting to
 
     // querying collection
-    const returnedUsers = await users.find().toArray();
-    res.send(returnedUsers);
+    res.send(foundUsers);
   } finally {
     // ensures client closes when finished or if there is an error
     await client.close();
