@@ -19,15 +19,18 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (isSignUp && (password !== confirmPassword)) {
+      if (isSignUp && password !== confirmPassword) {
         setError("Password must match!");
         return;
       }
 
-      const response = await axios.post(`http://localhost:8000/${isSignUp ? 'signup' : 'login'}`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `http://localhost:8000/${isSignUp ? "signup" : "login"}`,
+        {
+          email,
+          password,
+        }
+      );
       // set up cookies to be saved values in the broswer
 
       setCookie("Email", response.data.email);
@@ -36,11 +39,10 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
 
       const success = response.status === 201;
 
-      if (success && isSignUp) navigate("/onboarding")
-      if (success && !isSignUp) navigate("/dashboard")
+      if (success && isSignUp) navigate("/onboarding");
+      if (success && !isSignUp) navigate("/dashboard");
 
-      window.location.reload()
-
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
